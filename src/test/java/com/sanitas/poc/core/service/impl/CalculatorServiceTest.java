@@ -5,6 +5,7 @@ import com.sanitas.poc.model.dto.Calculation;
 import com.sanitas.poc.model.dto.CalculatorRequest;
 import com.sanitas.poc.model.enums.EOperationType;
 import mockit.Tested;
+import mockit.integration.junit4.JMockit;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(JMockit.class)
 public class CalculatorServiceTest {
 
     @Tested
