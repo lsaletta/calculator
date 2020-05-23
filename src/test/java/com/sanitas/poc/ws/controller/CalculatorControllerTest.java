@@ -75,23 +75,23 @@ public class CalculatorControllerTest {
 
     private CalculatorRequest buildSubtractCalculatorRequest() {
         CalculatorRequest calculatorRequest = new CalculatorRequest();
-        List<Calculation> operations = new ArrayList<>();
+        List<Calculation> calculations = new ArrayList<>();
         Calculation calculation = new Calculation();
         calculation.setParameters(Arrays.asList(24D, 20D));
         calculation.setOperationType(EOperationType.SUBTRACT);
-        operations.add(calculation);
-        calculatorRequest.setOperations(operations);
+        calculations.add(calculation);
+        calculatorRequest.setCalculations(calculations);
         return calculatorRequest;
     }
 
     private CalculatorRequest buildSumCalculatorRequest() {
         CalculatorRequest calculatorRequest = new CalculatorRequest();
-        List<Calculation> operations = new ArrayList<>();
+        List<Calculation> calculations = new ArrayList<>();
         Calculation calculation = new Calculation();
         calculation.setParameters(Arrays.asList(24D, 20D));
         calculation.setOperationType(EOperationType.SUM);
-        operations.add(calculation);
-        calculatorRequest.setOperations(operations);
+        calculations.add(calculation);
+        calculatorRequest.setCalculations(calculations);
         return calculatorRequest;
     }
 
