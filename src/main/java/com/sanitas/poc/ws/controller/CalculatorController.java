@@ -1,15 +1,13 @@
 package com.sanitas.poc.ws.controller;
 
+import com.sanitas.poc.core.exception.CalculationException;
 import com.sanitas.poc.core.service.CalculatorService;
 import com.sanitas.poc.model.dto.CalculatorRequest;
 import io.corp.calculator.TracerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -28,13 +26,16 @@ public class CalculatorController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Double> calculator(
-            @RequestBody CalculatorRequest request)
-            throws Exception {
+            @RequestBody CalculatorRequest request) throws CalculationException {
         Double result = calculatorService.calculate(request);
-
         tracer.trace(result);
-
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @ExceptionHandler({CalculationException.class})
+    public ResponseEntity<String> handleException(CalculationException exception) {
+        return new ResponseEntity<>(exception.getErrorType().getDescription(), HttpStatus.BAD_REQUEST);
+    }
+
 
 }
