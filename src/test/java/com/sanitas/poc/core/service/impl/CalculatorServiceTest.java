@@ -43,6 +43,13 @@ public class CalculatorServiceTest {
         Assert.assertEquals(Double.valueOf(24), result);
     }
 
+    @Test(expected = CalculationException.class)
+    public void calculate_when_number_elements_parameters_is_empty_or_null_throw_exception() throws CalculationException {
+        CalculatorRequest calculatorRequest = buildEmptyParametersCalculatorRequest();
+        Double result = calculatorService.calculate(calculatorRequest);
+        Assert.assertEquals(Double.valueOf(24), result);
+    }
+
 
     @Test(expected = CalculationException.class)
     public void calculate_when_number_operation_type_is_empty_or_null_throw_exception() throws CalculationException {
