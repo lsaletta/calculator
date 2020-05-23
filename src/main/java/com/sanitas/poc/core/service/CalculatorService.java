@@ -7,5 +7,12 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CalculatorService {
 
+    /**
+     * Metodo que realiza calculos aritméticos
+     *
+     * @param calculatorRequest
+     * @return
+     * @throws CalculationException
+     */
     public Double calculate(CalculatorRequest calculatorRequest) throws CalculationException;
 }
