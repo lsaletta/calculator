@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.AtomicDouble;
 import com.sanitas.poc.core.exception.CalculationException;
 import com.sanitas.poc.core.service.CalculatorService;
+import com.sanitas.poc.core.service.Operation;
 import com.sanitas.poc.model.dto.Calculation;
 import com.sanitas.poc.model.dto.CalculatorRequest;
 import com.sanitas.poc.model.enums.ECalculationErrorType;
@@ -11,8 +12,21 @@ import com.sanitas.poc.model.enums.EOperationType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class CalculatorServiceImpl implements CalculatorService {
+
+
+    private Map<EOperationType, Operation> operationMap;
+
+    public CalculatorServiceImpl() {
+        this.operationMap = new HashMap<>();
+        operationMap.put(EOperationType.SUM, new SumService());
+        operationMap.put(EOperationType.SUBTRACT, new SubtractService());
+    }
+
 
     /**
      * Metodo que realiza calculos aritméticos
@@ -28,11 +42,7 @@ public class CalculatorServiceImpl implements CalculatorService {
             Calculation calculation = Iterables.getFirst(calculatorRequest.getCalculations(), null);
             checkCalculation(calculation);
 
-            if (EOperationType.SUM.equals(calculation.getOperationType())) {
-                return calculateSum(calculation);
-            } else {
-                return calculateSubtract(calculation);
-            }
+            return operationMap.get(calculation.getOperationType()).run(calculation);
 
         } else {
             throw new CalculationException(ECalculationErrorType.INVALID_CALCULATION);
