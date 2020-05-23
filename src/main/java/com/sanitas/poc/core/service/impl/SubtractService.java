@@ -1,10 +1,19 @@
 package com.sanitas.poc.core.service.impl;
 
 import com.google.common.util.concurrent.AtomicDouble;
+import com.sanitas.poc.core.service.Operable;
 import com.sanitas.poc.core.service.Operation;
 import com.sanitas.poc.model.dto.Calculation;
+import com.sanitas.poc.model.enums.EOperationType;
+import org.springframework.stereotype.Service;
 
-public class SubtractService implements Operation {
+@Service
+@Operation
+public class SubtractService implements Operable {
+    @Override
+    public EOperationType getOperationType() {
+        return EOperationType.SUBTRACT;
+    }
     @Override
     public Double run(Calculation calculation) {
         AtomicDouble atomicDouble = new AtomicDouble(0);

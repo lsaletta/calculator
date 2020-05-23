@@ -1,7 +1,11 @@
 package com.sanitas.poc.core.service;
 
-import com.sanitas.poc.model.dto.Calculation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface Operation {
-    public Double run(Calculation calculation);
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Operation {
 }
