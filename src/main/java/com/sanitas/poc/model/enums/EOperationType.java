@@ -6,5 +6,5 @@ package com.sanitas.poc.model.enums;
  * - DIFF: Para restar
  */
 public enum EOperationType {
-    SUM, DIFF;
+    SUM, SUBTRACT;
 }
