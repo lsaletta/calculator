@@ -2,9 +2,11 @@ package com.sanitas.poc.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sanitas.poc.model.enums.EOperationType;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class Calculation {
 
     /**
