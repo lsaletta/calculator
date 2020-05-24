@@ -56,38 +56,6 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     /**
-     * Realiza la operacion de suma
-     *
-     * @param calculation
-     * @return
-     */
-    private Double calculateSum(Calculation calculation) {
-        return calculation.getParameters().stream()
-                .reduce(0D, (a, b) -> a + b);
-    }
-
-    /**
-     * Realiza la operacion de resta
-     *
-     * @param calculation
-     * @return
-     */
-    private Double calculateSubtract(Calculation calculation) {
-        AtomicDouble atomicDouble = new AtomicDouble(0);
-
-        calculation.getParameters().stream()
-                .forEach(a -> {
-                    if (atomicDouble.get() == 0D) {
-                        atomicDouble.addAndGet(a);
-                    } else {
-                        atomicDouble.set(atomicDouble.get() - a);
-                    }
-                });
-
-        return atomicDouble.get();
-    }
-
-    /**
      * Comprueba la validez de los parametros de entrada
      *
      * @param calculation
